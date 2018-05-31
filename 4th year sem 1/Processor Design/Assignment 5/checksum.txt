@@ -1,0 +1,50 @@
+addi $t0, $zero, 1
+sw $t1, 0($t0)
+addi $t0, $zero, 3
+sw $t1, 1($t0)
+addi $t0, $zero, 4
+sw $t1, 2($t0)
+addi $t0, $zero, 5 
+sw $t1, 3($t0)
+addi $t0, $zero, 6
+sw $t1, 4($t0)
+addi $t0, $zero, 9
+sw $t1, 5($t0)
+addi $t0, $zero, 3
+sw $t1, 6($t0)
+addi $t0, $zero, 8
+sw $t1, 7($t0)
+
+addi $t0, $zero, 0 210
+lw $t1, 0($t0)     060
+addi $t0, $zero, 1 211
+
+lw $t2, 0($t0)     070
+add $t1, $t1, $t2  3b2
+addi $t0, $zero, 1 211
+
+lw $t2, 0($t0)     070
+add $t1, $t1, $t2  3b2
+addi $t0, $zero, 1 211
+
+lw $t2, 0($t0)     070
+add $t1, $t1, $t2  3b2
+addi $t0, $zero, 1 211
+
+lw $t2, 0($t0)     070
+add $t1, $t1, $t2  3b2
+addi $t0, $zero, 1 211
+
+lw $t2, 0($t0)     070
+add $t1, $t1, $t2  3b2
+addi $t0, $zero, 1 211
+
+lw $t2, 0($t0)     070
+add $t1, $t1, $t2  3b2
+addi $t0, $zero, 1 211
+
+lw $t2, 0($t0)     070
+add $t1, $t1, $t2  3b2
+addi $t0, $zero, 1 211
+
+sw $t1, 0($t0)     1b0

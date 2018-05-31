@@ -1,0 +1,25 @@
+.data
+.eqv BitMap 0x10010000			# Setting BitMap to be the first address of our bitmap in hex.
+.eqv White 0x00FFFFFF			# Setting White to be the hex value for white.
+.align 2
+
+ .text # code goes in text segment
+ .globl main # must be global symbol
+main: 
+	jal ClearScreen
+ li $v0, 10 # system call for exit
+ syscall # Exit!
+
+ClearScreen:	# Sets initial conditions needed for our ClearLoop.
+	li $t0, BitMap			# Load our bitmaps first bit address
+	li $t1, White			# Load the hex value for white
+	addi $t2, $zero, 65536		# (256*256)This will be the max number of elements in the bitmap. End of loop condition.
+	addi $t3, $zero, 0 		# Will be a counter for our loop
+
+ClearLoop:	# Loop that clears our Bitmap display by setting each bitmap address to white.
+	sw $t1, 0($t0)			# Change our current bitmap address to white
+	add $t0 ,$t0, 4			# Move to next bitmap address
+	add $t3, $t3, 1			# Iterate our counter
+	bne  $t3,$t2, ClearLoop		# Run through loop to change each pixel white. End when we have turned entire bitmap white.
+	
+	

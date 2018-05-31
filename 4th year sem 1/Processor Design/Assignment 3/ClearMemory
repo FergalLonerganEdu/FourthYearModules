@@ -1,0 +1,23 @@
+.data
+MemBlock: .space 65536	#256*256
+
+	.align 2
+
+ .text # code goes in text segment
+ .globl main # must be global symbol
+main: 
+	jal ClearMemory 
+ li $v0, 10 # system call for exit
+ syscall # Exit!
+
+ClearMemory:
+	la $t0, MemBlock	#load bitmap first bit address
+	li $t1, 0		#g 0 will be used to clear our memory block
+	addi $t2, $zero, 0 	#will be a counter for our loop
+	addi $t3, $zero, 65536	#256*256
+	
+ClearMemLoop:
+	sw $t1, 0($t0)		# change our current bit to white
+	add $t0 ,$t0, 4		# move to next byte address
+	add $t2, $t2, 1		# iterate our counter
+	bne  $t3,$t2, ClearMemLoop		# Iterate through loop to change each pixel white

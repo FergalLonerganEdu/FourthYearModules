@@ -1,0 +1,3 @@
+[3844]  Error log for : GRAPHS.DS0.dsf
+	[3844]	Unable to relocate data set file named: C:\Users\fergal\Desktop\RF Electronics\LAB 6\DATA_SETS\Lab 6\GRAPHS.DS0.dsf : The operation completed successfully.
+

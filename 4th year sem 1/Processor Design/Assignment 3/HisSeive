@@ -1,0 +1,49 @@
+# Assignment 1 
+# Question 2
+
+# Sieve
+
+		.data
+PRIMES: 	.space	500000
+SIEVE:		.space	2500000
+        	.text
+		.globl	main
+		
+main:   	# Reset the sieve
+		la	$s0, SIEVE		# set data pointer
+		li	$s1, 62025		# set loop counter 
+loopReset: 	sb	$zero, 0($s0)        	# store zero at data pointer 
+		addi	$s0, $s0, +1		# point to next byte
+		addi	$s1, $s1, -1		# decrement counter
+		bne	$s1, $zero, loopReset	# repeat until counter == 0
+			
+		# Run the sieve
+		la	$s0, SIEVE		# set data pointer
+		li      $s1, 2                  # set the current base
+		li      $s2, 1                  # strikeout constant
+		li      $s3, 62026               # set end of array + 1
+		li      $s4, 31014              # set last base + 1
+loopBase:	add	$s5, $s1, $s1		# copy 2*base to the current value
+loopSweep:	add	$t0, $s0, $s5		# calculate the address of the current byte
+		sb      $s2, 0($t0)		# strike out the current byte
+		add	$s5, $s5, $s1		# increase the current value by the current base
+		blt	$s5, $s3, loopSweep	# repeat until current value > limit
+		addi	$s1, $s1, +1		# next base
+		blt	$s1, $s4, loopBase	# repeat until base > limit/2
+		
+		# Store the results		
+		la	$s0, SIEVE		# set data pointer
+		la	$s1, PRIMES		# set output pointer
+		li	$s2, 2			# reset current byte counter
+		li	$s3, 62026		# set counter limit + 1
+loopResults:	add	$t0, $s0, $s2		# calculate the address of the current byte
+		lb	$s4, 0($t0)		# read the current byte
+		bne	$s4, $zero, skip	# if the current byte is not stuck out
+		sw	$s2, 0($s1)		# then store the current value
+		addi	$s1, $s1, +4		# increment the output pointer by 1 word
+skip:		addi	$s2, $s2, +1		# increment the current byte pointer by 1 byte
+		bne	$s2, $s3, loopResults  # repeat until current byte == 1000
+		
+		# End		
+         	li      $v0, 10
+         	syscall
